@@ -1,23 +1,21 @@
-// main.go
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"log"
+	"nft-api/wire"
 )
 
 func main() {
-	// Ginのデフォルトのルーターを作成
-	r := gin.Default()
+	voiceHandler, err := wire.InitializeWire()
+	if err != nil {
+		log.Fatalf("依存性の注入に失敗しました。 %v", err)
+	}
 
-	// ルートハンドラーを定義
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello, World!",
-		})
-	})
-
-	// サーバーをポート8080で開始
-	r.Run(":8080")
+	router := gin.Default()
+	voiceHandler.RegisterVoiceRoutes(router)
+	err = router.Run(":8080")
+	if err != nil {
+		log.Fatalf("アプリケーションの起動に失敗しました。 %v", err)
+	}
 }
