@@ -9,24 +9,20 @@ import (
 type VoiceRepositoryImpl struct{}
 
 func NewVoiceRepository() VoiceRepository {
-	return &VoiceRepositoryImpl{}
+	return VoiceRepositoryImpl{}
 }
 
-func (v *VoiceRepositoryImpl) Get() *domain.Voice {
+func (v VoiceRepositoryImpl) Get() domain.Voice {
 	// MEMO: DBから取得した定の仮実装
-	voiceEntity := &entity.VoiceEntity{
+	voiceEntity := entity.VoiceEntity{
 		Id:      1,
 		Name:    "sample voice name",
 		Content: "sample voice",
 	}
 
-	return &domain.Voice{
-		Id:      voiceEntity.Id,
-		Name:    voiceEntity.Name,
-		Content: voiceEntity.Content,
-	}
+	return domain.Voice{}.Build(voiceEntity.Id, voiceEntity.Name, voiceEntity.Content)
 }
 
-func (v *VoiceRepositoryImpl) Create(request request.VoiceCreateRequest) {
+func (v VoiceRepositoryImpl) Create(request request.VoiceCreateRequest) {
 	// MEMO: DBに登録する処理
 }

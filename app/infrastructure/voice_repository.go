@@ -6,6 +6,6 @@ import (
 )
 
 type VoiceRepository interface {
-	Get() *domain.Voice
+	Get() domain.Voice
 	Create(request request.VoiceCreateRequest)
 }
