@@ -14,7 +14,7 @@ func NewVoiceUsecase(voiceRepository infrastructure.VoiceRepository) VoiceUsecas
 	return VoiceInteractor{repository: voiceRepository}
 }
 
-func (interactor VoiceInteractor) Get() *domain.Voice {
+func (interactor VoiceInteractor) Get() domain.Voice {
 	return interactor.repository.Get()
 }
 

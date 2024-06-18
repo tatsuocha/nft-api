@@ -6,6 +6,6 @@ import (
 )
 
 type VoiceUsecase interface {
-	Get() *domain.Voice
+	Get() domain.Voice
 	Create(request request.VoiceCreateRequest)
 }
