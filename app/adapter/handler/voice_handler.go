@@ -4,15 +4,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"nft-api/app/adapter/request"
-	"nft-api/app/usecase"
+	"nft-api/app/domain/usecase"
 )
 
 type VoiceHandler struct {
-	usecase usecase.VoiceUsecase
+	useCase usecase.VoiceUseCase
 }
 
-func NewVoiceHandler(voiceUsecase usecase.VoiceUsecase) *VoiceHandler {
-	return &VoiceHandler{usecase: voiceUsecase}
+func NewVoiceHandler(voiceUseCase usecase.VoiceUseCase) *VoiceHandler {
+	return &VoiceHandler{useCase: voiceUseCase}
 }
 
 func (voiceHandler VoiceHandler) RegisterVoiceRoutes(router *gin.Engine) {
@@ -21,7 +21,7 @@ func (voiceHandler VoiceHandler) RegisterVoiceRoutes(router *gin.Engine) {
 }
 
 func (voiceHandler VoiceHandler) get(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"response": voiceHandler.usecase.Get()})
+	context.JSON(http.StatusOK, gin.H{"response": voiceHandler.useCase.Get()})
 }
 
 // MEMO: リクエストサンプル（PowerShell
@@ -33,6 +33,6 @@ func (voiceHandler VoiceHandler) create(context *gin.Context) {
 		return
 	}
 
-	voiceHandler.usecase.Create(voiceCreateRequest)
+	voiceHandler.useCase.Create(voiceCreateRequest)
 	context.JSON(http.StatusCreated, gin.H{"response": "Voice created successfully"})
 }

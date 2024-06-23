@@ -1,11 +1,20 @@
 package wire
 
-// MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は当該関数はコメントアウトしておく
-//func InitializeWire() (*adapter.VoiceHandler, error) {
+// MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
+//func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
 //	wire.Build(
-//		infrastructure.NewVoiceRepository,
-//		usecase.NewVoiceUsecase,
-//		adapter.NewVoiceHandler,
+//		repository.NewVoiceRepository,
+//		usecase.NewVoiceUseCase,
+//		handler.NewVoiceHandler,
 //	)
-//	return &adapter.VoiceHandler{}, nil
+//	return &handler.VoiceHandler{}, nil
+//}
+//
+//func InitializeEthereumHandler() (*handler.EthereumHandler, error) {
+//	wire.Build(
+//		repository.NewEthereumRepository,
+//		usecase.NewEthereumUseCase,
+//		handler.NewEthereumHandler,
+//	)
+//	return &handler.EthereumHandler{}, nil
 //}

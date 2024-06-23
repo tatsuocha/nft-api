@@ -1,4 +1,4 @@
-package domain
+package model
 
 type Voice struct {
 	Id      int
