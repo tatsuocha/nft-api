@@ -1,11 +1,11 @@
-package infrastructure
+package repository
 
 import (
 	"nft-api/app/adapter/request"
-	"nft-api/app/domain"
+	"nft-api/app/domain/model"
 )
 
 type VoiceRepository interface {
-	Get() domain.Voice
+	Get() model.Voice
 	Create(request request.VoiceCreateRequest)
 }

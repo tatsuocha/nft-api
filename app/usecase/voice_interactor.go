@@ -2,19 +2,20 @@ package usecase
 
 import (
 	"nft-api/app/adapter/request"
-	"nft-api/app/domain"
-	"nft-api/app/infrastructure"
+	"nft-api/app/domain/model"
+	"nft-api/app/domain/repository"
+	"nft-api/app/domain/usecase"
 )
 
 type VoiceInteractor struct {
-	repository infrastructure.VoiceRepository
+	repository repository.VoiceRepository
 }
 
-func NewVoiceUsecase(voiceRepository infrastructure.VoiceRepository) VoiceUsecase {
+func NewVoiceUseCase(voiceRepository repository.VoiceRepository) usecase.VoiceUseCase {
 	return VoiceInteractor{repository: voiceRepository}
 }
 
-func (interactor VoiceInteractor) Get() domain.Voice {
+func (interactor VoiceInteractor) Get() model.Voice {
 	return interactor.repository.Get()
 }
 

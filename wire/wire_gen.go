@@ -8,15 +8,23 @@ package wire
 
 import (
 	"nft-api/app/adapter/handler"
-	"nft-api/app/infrastructure"
+	"nft-api/app/infrastructure/repository"
 	"nft-api/app/usecase"
 )
 
 // Injectors from wire.go:
 
-func InitializeWire() (*handler.VoiceHandler, error) {
-	voiceRepository := infrastructure.NewVoiceRepository()
-	voiceUsecase := usecase.NewVoiceUsecase(voiceRepository)
-	voiceHandler := handler.NewVoiceHandler(voiceUsecase)
+// MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
+func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
+	voiceRepository := repository.NewVoiceRepository()
+	voiceUseCase := usecase.NewVoiceUseCase(voiceRepository)
+	voiceHandler := handler.NewVoiceHandler(voiceUseCase)
 	return voiceHandler, nil
+}
+
+func InitializeEthereumHandler() (*handler.EthereumHandler, error) {
+	ethereumRepository := repository.NewEthereumRepository()
+	ethereumUseCase := usecase.NewEthereumUseCase(ethereumRepository)
+	ethereumHandler := handler.NewEthereumHandler(ethereumUseCase)
+	return ethereumHandler, nil
 }

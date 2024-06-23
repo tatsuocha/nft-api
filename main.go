@@ -7,14 +7,12 @@ import (
 )
 
 func main() {
-	voiceHandler, err := wire.InitializeWire()
-	if err != nil {
-		log.Fatalf("依存性の注入に失敗しました。 %v", err)
-	}
-
 	router := gin.Default()
+	voiceHandler, _ := wire.InitializeVoiceHandler()
+	ethereumHandler, _ := wire.InitializeEthereumHandler()
 	voiceHandler.RegisterVoiceRoutes(router)
-	err = router.Run(":8080")
+	ethereumHandler.RegisterEthereumRoutes(router)
+	err := router.Run(":8080")
 	if err != nil {
 		log.Fatalf("アプリケーションの起動に失敗しました。 %v", err)
 	}

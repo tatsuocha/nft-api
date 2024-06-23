@@ -2,10 +2,10 @@ package usecase
 
 import (
 	"nft-api/app/adapter/request"
-	"nft-api/app/domain"
+	"nft-api/app/domain/model"
 )
 
-type VoiceUsecase interface {
-	Get() domain.Voice
+type VoiceUseCase interface {
+	Get() model.Voice
 	Create(request request.VoiceCreateRequest)
 }
