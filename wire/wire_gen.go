@@ -8,6 +8,8 @@ package wire
 
 import (
 	"nft-api/app/adapter/handler"
+	"nft-api/app/infrastructure/dao/ethereum"
+	"nft-api/app/infrastructure/dao/postgresql"
 	"nft-api/app/infrastructure/repository"
 	"nft-api/app/usecase"
 )
@@ -16,14 +18,16 @@ import (
 
 // MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
 func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
-	voiceRepository := repository.NewVoiceRepository()
+	voiceDao := postgresql.NewVoiceDao()
+	voiceRepository := repository.NewVoiceRepository(voiceDao)
 	voiceUseCase := usecase.NewVoiceUseCase(voiceRepository)
 	voiceHandler := handler.NewVoiceHandler(voiceUseCase)
 	return voiceHandler, nil
 }
 
 func InitializeEthereumHandler() (*handler.EthereumHandler, error) {
-	ethereumRepository := repository.NewEthereumRepository()
+	ethereumDao := ethereum.NewEthereumDao()
+	ethereumRepository := repository.NewEthereumRepository(ethereumDao)
 	ethereumUseCase := usecase.NewEthereumUseCase(ethereumRepository)
 	ethereumHandler := handler.NewEthereumHandler(ethereumUseCase)
 	return ethereumHandler, nil

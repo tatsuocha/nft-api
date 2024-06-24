@@ -1,4 +1,4 @@
-package dao
+package ethereum
 
 import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -8,6 +8,10 @@ import (
 )
 
 type EthereumDao struct{}
+
+func NewEthereumDao() EthereumDao {
+	return EthereumDao{}
+}
 
 func (dao EthereumDao) Connect(rpcUrl string) *ethclient.Client {
 	client, err := ethclient.Dial(rpcUrl)
