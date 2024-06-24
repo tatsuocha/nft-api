@@ -10,18 +10,18 @@ import (
 	"math/big"
 	"nft-api/app/domain/model"
 	"nft-api/app/domain/repository"
-	"nft-api/app/infrastructure/dao"
+	"nft-api/app/infrastructure/dao/ethereum"
 	"nft-api/contract"
 )
 
 const rpcUrl = "http://127.0.0.1:7545"
 
 type EthereumRepositoryImpl struct {
-	ethereumDao dao.EthereumDao
+	dao ethereum.EthereumDao
 }
 
-func NewEthereumRepository() repository.EthereumRepository {
-	return EthereumRepositoryImpl{}
+func NewEthereumRepository(ethereumDao ethereum.EthereumDao) repository.EthereumRepository {
+	return EthereumRepositoryImpl{dao: ethereumDao}
 }
 
 func (repositoryImpl EthereumRepositoryImpl) Get(key string, contractAddress string) model.Ethereum {
@@ -36,7 +36,7 @@ func (repositoryImpl EthereumRepositoryImpl) Get(key string, contractAddress str
 		log.Fatalf("パブリックキーへのキャストに失敗しました。: %v", err)
 	}
 
-	client := repositoryImpl.ethereumDao.Connect(rpcUrl)
+	client := repositoryImpl.dao.Connect(rpcUrl)
 	fromAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
 	nonce, err := client.PendingNonceAt(context.Background(), fromAddress)
 	if err != nil {
@@ -70,7 +70,7 @@ func (repositoryImpl EthereumRepositoryImpl) Get(key string, contractAddress str
 	}
 
 	// Ethereumの値を取得
-	result := repositoryImpl.ethereumDao.Get(instance)
+	result := repositoryImpl.dao.Get(instance)
 
 	return *model.Ethereum{}.Build(result)
 }

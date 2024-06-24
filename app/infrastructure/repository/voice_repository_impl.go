@@ -5,12 +5,15 @@ import (
 	"nft-api/app/domain/entity"
 	"nft-api/app/domain/model"
 	"nft-api/app/domain/repository"
+	"nft-api/app/infrastructure/dao/postgresql"
 )
 
-type VoiceRepositoryImpl struct{}
+type VoiceRepositoryImpl struct {
+	dao postgresql.VoiceDao
+}
 
-func NewVoiceRepository() repository.VoiceRepository {
-	return VoiceRepositoryImpl{}
+func NewVoiceRepository(voiceDao postgresql.VoiceDao) repository.VoiceRepository {
+	return VoiceRepositoryImpl{dao: voiceDao}
 }
 
 func (repositoryImpl VoiceRepositoryImpl) Get() model.Voice {

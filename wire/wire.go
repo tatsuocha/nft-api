@@ -3,6 +3,7 @@ package wire
 // MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
 //func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
 //	wire.Build(
+//		postgresql.NewVoiceDao,
 //		repository.NewVoiceRepository,
 //		usecase.NewVoiceUseCase,
 //		handler.NewVoiceHandler,
@@ -12,6 +13,7 @@ package wire
 //
 //func InitializeEthereumHandler() (*handler.EthereumHandler, error) {
 //	wire.Build(
+//		ethereum.NewEthereumDao,
 //		repository.NewEthereumRepository,
 //		usecase.NewEthereumUseCase,
 //		handler.NewEthereumHandler,
