@@ -29,9 +29,10 @@ func (repositoryImpl VoiceRepositoryImpl) Get() *[]model.Voice {
 	return toVoices(voiceEntities)
 }
 
-func (repositoryImpl VoiceRepositoryImpl) Create(name string, content string) {
+func (repositoryImpl VoiceRepositoryImpl) Create(name *string, content *string) {
 	db := repositoryImpl.commonDao.Connect()
 
+	log.Print(name, content)
 	result := db.Create(entity.VoiceEntity{}.BuildForInsert(1, name, content))
 	if result.Error != nil {
 		log.Fatalf("voiceの登録に失敗しました。 %v", result.Error)
@@ -41,7 +42,7 @@ func (repositoryImpl VoiceRepositoryImpl) Create(name string, content string) {
 func toVoices(voiceEntities []entity.VoiceEntity) *[]model.Voice {
 	var voices []model.Voice
 	for _, voiceEntity := range voiceEntities {
-		voice := model.Voice{}.Build(int(voiceEntity.Id), voiceEntity.Name, voiceEntity.Content)
+		voice := model.Voice{}.Build(&voiceEntity)
 		voices = append(voices, voice)
 	}
 

@@ -6,5 +6,5 @@ import (
 
 type VoiceRepository interface {
 	Get() *[]model.Voice
-	Create(name string, content string)
+	Create(name *string, content *string)
 }
