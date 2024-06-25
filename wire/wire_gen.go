@@ -19,7 +19,8 @@ import (
 // MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
 func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
 	voiceDao := postgresql.NewVoiceDao()
-	voiceRepository := repository.NewVoiceRepository(voiceDao)
+	commonDao := postgresql.NewCommonDao()
+	voiceRepository := repository.NewVoiceRepository(voiceDao, commonDao)
 	voiceUseCase := usecase.NewVoiceUseCase(voiceRepository)
 	voiceHandler := handler.NewVoiceHandler(voiceUseCase)
 	return voiceHandler, nil

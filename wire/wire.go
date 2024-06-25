@@ -1,8 +1,9 @@
 package wire
 
-// MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後は関数はコメントアウトしておく
+// MEMO: 再宣言エラーが発生してしまうため、wireで自動生成後はコメントアウトしておく
 //func InitializeVoiceHandler() (*handler.VoiceHandler, error) {
 //	wire.Build(
+//		postgresql.NewCommonDao,
 //		postgresql.NewVoiceDao,
 //		repository.NewVoiceRepository,
 //		usecase.NewVoiceUseCase,

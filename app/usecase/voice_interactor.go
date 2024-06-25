@@ -1,7 +1,6 @@
 package usecase
 
 import (
-	"nft-api/app/adapter/request"
 	"nft-api/app/domain/model"
 	"nft-api/app/domain/repository"
 	"nft-api/app/domain/usecase"
@@ -15,10 +14,10 @@ func NewVoiceUseCase(voiceRepository repository.VoiceRepository) usecase.VoiceUs
 	return VoiceInteractor{repository: voiceRepository}
 }
 
-func (interactor VoiceInteractor) Get() model.Voice {
+func (interactor VoiceInteractor) Get() *[]model.Voice {
 	return interactor.repository.Get()
 }
 
-func (interactor VoiceInteractor) Create(request request.VoiceCreateRequest) {
-	interactor.repository.Create(request)
+func (interactor VoiceInteractor) Create(name string, content string) {
+	interactor.repository.Create(name, content)
 }

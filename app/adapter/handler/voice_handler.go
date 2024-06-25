@@ -24,8 +24,8 @@ func (voiceHandler VoiceHandler) get(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"response": voiceHandler.useCase.Get()})
 }
 
-// MEMO: リクエストサンプル（PowerShell
-// Invoke-WebRequest -Uri http://localhost:8080/voice -Method Post -ContentType "application/json" -Body '{"name": "example voice", "content": "example voice"}'
+// MEMO: リクエストサンプル（PowerShell)
+// Invoke-WebRequest -Uri http://localhost:8080/voice -Method Post -ContentType "application/json" -Body '{"name": "example voice name", "content": "example voice"}'
 func (voiceHandler VoiceHandler) create(context *gin.Context) {
 	var voiceCreateRequest request.VoiceCreateRequest
 	if err := context.ShouldBindJSON(&voiceCreateRequest); err != nil {
@@ -33,6 +33,6 @@ func (voiceHandler VoiceHandler) create(context *gin.Context) {
 		return
 	}
 
-	voiceHandler.useCase.Create(voiceCreateRequest)
+	voiceHandler.useCase.Create(voiceCreateRequest.Name, voiceCreateRequest.Content)
 	context.JSON(http.StatusCreated, gin.H{"response": "Voice created successfully"})
 }
