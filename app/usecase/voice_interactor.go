@@ -18,6 +18,6 @@ func (interactor VoiceInteractor) Get() *[]model.Voice {
 	return interactor.repository.Get()
 }
 
-func (interactor VoiceInteractor) Create(name string, content string) {
+func (interactor VoiceInteractor) Create(name *string, content *string) {
 	interactor.repository.Create(name, content)
 }

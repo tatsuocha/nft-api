@@ -12,10 +12,10 @@ type VoiceEntity struct {
 	CreatedDatetime time.Time `gorm:"autoCreateTime"`
 }
 
-func (voiceEntity VoiceEntity) BuildForInsert(userId int64, name string, content string) *VoiceEntity {
+func (voiceEntity VoiceEntity) BuildForInsert(userId int64, name *string, content *string) *VoiceEntity {
 	return &VoiceEntity{
 		UserId:  userId,
-		Name:    name,
-		Content: content,
+		Name:    *name,
+		Content: *content,
 	}
 }

@@ -1,15 +1,24 @@
 package model
 
+import (
+	"nft-api/app/domain/entity"
+	"time"
+)
+
 type Voice struct {
-	Id      int
-	Name    string
-	Content string
+	Id              uint
+	UserId          int64
+	Name            string
+	Content         string
+	CreatedDatetime time.Time
 }
 
-func (voice Voice) Build(id int, name string, content string) Voice {
+func (voice Voice) Build(voiceEntity *entity.VoiceEntity) Voice {
 	return Voice{
-		Id:      id,
-		Name:    name,
-		Content: content,
+		Id:              voiceEntity.Id,
+		UserId:          voiceEntity.UserId,
+		Name:            voiceEntity.Name,
+		Content:         voiceEntity.Content,
+		CreatedDatetime: voiceEntity.CreatedDatetime,
 	}
 }

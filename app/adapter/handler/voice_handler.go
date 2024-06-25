@@ -33,6 +33,6 @@ func (voiceHandler VoiceHandler) create(context *gin.Context) {
 		return
 	}
 
-	voiceHandler.useCase.Create(voiceCreateRequest.Name, voiceCreateRequest.Content)
-	context.JSON(http.StatusCreated, gin.H{"response": "Voice created successfully"})
+	voiceHandler.useCase.Create(&voiceCreateRequest.Name, &voiceCreateRequest.Content)
+	context.JSON(http.StatusCreated, gin.H{"response": "voiceの登録に成功しました。"})
 }
