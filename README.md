@@ -6,6 +6,7 @@
 - フレームワーク：gin
 - データベース：PostgreSQL
 - O/Rマッパ：gorm
+- インフラストラクチャ：docker
 - その他：
   - clean architecture 
   - dependency injection
