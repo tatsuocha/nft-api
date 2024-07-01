@@ -7,11 +7,28 @@ import (
 	"log"
 	"nft-api/app/domain/entity"
 	"nft-api/wire"
+	"os"
 )
 
 func main() {
+	initDb()
 	run()
 	initDb()
+}
+
+func initDb() {
+	dsn := "host=" + os.Getenv("POSTGRES_HOST") + " user=" + os.Getenv("POSTGRES_USER") + " password=" + os.Getenv("POSTGRES_PASSWORD") + " dbname=" + os.Getenv("POSTGRES_NAME") + " port=" + os.Getenv("POSTGRES_PORT") + " sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal("データベースの接続が失敗しました。: ", err)
+	}
+	// データベース接続の確認
+	log.Println("データベースの接続が完了しました。")
+
+	err = db.AutoMigrate(&entity.VoiceEntity{})
+	if err != nil {
+		log.Fatal("データベースの初期化に失敗しました。: ", err)
+	}
 }
 
 func run() {
