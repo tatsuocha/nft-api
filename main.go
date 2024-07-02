@@ -6,20 +6,20 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"nft-api/app/domain/entity"
+	"nft-api/app/utils"
 	"nft-api/wire"
-	"os"
 )
 
 func main() {
 	initDb()
-	run()
+	runApplication()
 }
 
 func initDb() {
-	dsn := "host=" + os.Getenv("POSTGRES_HOST") + " user=" + os.Getenv("POSTGRES_USER") + " password=" + os.Getenv("POSTGRES_PASSWORD") + " dbname=" + os.Getenv("POSTGRES_NAME") + " port=" + os.Getenv("POSTGRES_PORT") + " sslmode=disable"
+	dsn := "host=" + utils.GetEnv("POSTGRES_HOST") + " user=" + utils.GetEnv("POSTGRES_USER") + " password=" + utils.GetEnv("POSTGRES_PASSWORD") + " dbname=" + utils.GetEnv("POSTGRES_NAME") + " port=" + utils.GetEnv("POSTGRES_PORT") + " sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatal("データベースの接続が失敗しました。: ", err)
+		log.Fatal("データベースの接続に失敗しました。: ", err)
 	}
 	// データベース接続の確認
 	log.Println("データベースの接続が完了しました。")
@@ -30,7 +30,7 @@ func initDb() {
 	}
 }
 
-func run() {
+func runApplication() {
 	router := gin.Default()
 	voiceHandler, _ := wire.InitializeVoiceHandler()
 	ethereumHandler, _ := wire.InitializeEthereumHandler()
