@@ -42,8 +42,7 @@ func (repositoryImpl VoiceRepositoryImpl) Create(name *string, content *string) 
 func toVoices(voiceEntities []entity.VoiceEntity) *[]model.Voice {
 	var voices []model.Voice
 	for _, voiceEntity := range voiceEntities {
-		voice := model.Voice{}.Build(&voiceEntity)
-		voices = append(voices, voice)
+		voices = append(voices, model.Voice{}.Build(&voiceEntity))
 	}
 
 	return &voices

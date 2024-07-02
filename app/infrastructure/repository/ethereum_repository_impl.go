@@ -53,13 +53,14 @@ func (repositoryImpl EthereumRepositoryImpl) Get(key string, contractAddress str
 		log.Fatalf("チェインIDの取得に失敗しました。: %v", err)
 	}
 
-	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, chainId) // GanacheのデフォルトチェーンIDは1337
+	auth, err := bind.NewKeyedTransactorWithChainID(privateKey, chainId)
 	if err != nil {
 		log.Fatalf("認証トランザクションの生成に失敗しました。: %v", err)
 	}
 	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // 送金する場合のETHの量
-	auth.GasLimit = uint64(300000) // ガスリミット
+	// 送金する場合のETHの量
+	auth.Value = big.NewInt(0)
+	auth.GasLimit = uint64(300000)
 	auth.GasPrice = gasPrice
 
 	// インスタンス化
@@ -74,9 +75,3 @@ func (repositoryImpl EthereumRepositoryImpl) Get(key string, contractAddress str
 
 	return *model.Ethereum{}.Build(result)
 }
-
-// ストアの値を設定
-// transaction, err := instance.Create(auth, big.NewInt(123456789))
-// if err != nil {
-// 	log.Fatalf("コントラクトへのストアの値設定に失敗しました。: %v", err)
-// }
